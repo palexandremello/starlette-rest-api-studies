@@ -1,0 +1,5 @@
+[report]
+exclude_lines =
+    pragma: no cover
+    @abstract
+omit = *enums/*, ./venv/*,*tests*,*apps.py,*manage.py,*__init__.py,*migrations*,*asgi*,*wsgi*,*admin.py,*urls.py,*test/*
