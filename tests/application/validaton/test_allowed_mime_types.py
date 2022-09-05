@@ -7,7 +7,7 @@ def test_should_return_InvmalidMimeTypeError_if_value_is_invalid():
     error = sut.validate()
     assert isinstance(error, InvalidMimeTypeError)
 
-def test_should_return_None_if_value_is_valid():
+def test_should_return_None_when_is_another_valid_value():
     sut = AllowedMimeTypes('xlsx', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
     error = sut.validate()
     assert error == None

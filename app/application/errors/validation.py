@@ -4,7 +4,6 @@ class RequiredFieldError(Exception):
         print(self.message)
         super().__init__(self.message)
 
-
 class MaxFileSizeError(Exception):
     def __init__(self, max_size_in_mb) -> None:
         self.message = f'File upload limit is {max_size_in_mb} MB'
@@ -13,4 +12,9 @@ class MaxFileSizeError(Exception):
 class InvalidMimeTypeError(Exception):
     def __init__(self, allowed: str) -> None:
         self.message = f'Unsupported file. Allowed extensions {allowed}'
+        super().__init__(self.message)
+
+class InvalidSpreadsheetError(Exception):
+    def __init__(self, allowed_columns) -> None:
+        self.message = f'Invalid columns allowed. Spreadsheet have theses {allowed_columns} columns'
         super().__init__(self.message)

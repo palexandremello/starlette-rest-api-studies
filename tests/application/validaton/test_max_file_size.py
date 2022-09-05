@@ -1,8 +1,8 @@
 
 import io
 from app.application.errors.validation import MaxFileSizeError
-
 from app.application.validation.max_file_size import MaxFileSize
+
 
 MAX_SIZE = 5
 def make_buffer(size_of_buffer):
@@ -18,15 +18,8 @@ def test_should_be_return_MaxFileSizeError_if_value_is_invalid():
     error = sut.validate()
     assert isinstance(error, MaxFileSizeError)
 
-def test_should_be_return_None_if_value_is_valid():
+def test_should_be_return_None_value_is_valid():
     size_of_buffer = 4
-    valid_buffer = make_buffer(size_of_buffer)
-    sut = MaxFileSize(MAX_SIZE, valid_buffer)
-    error = sut.validate()
-    assert error == None
-
-def test_should_be_return_None_if_value_is_valid():
-    size_of_buffer = 5
     valid_buffer = make_buffer(size_of_buffer)
     sut = MaxFileSize(MAX_SIZE, valid_buffer)
     error = sut.validate()
