@@ -21,3 +21,4 @@ def test_should_return_None_if_value_is_not_empty():
     sut = Required('any_value', 'any_field')
     error = sut.validate()
     assert error == None, "Expected: {None}, Result: {error}"
+
