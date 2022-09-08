@@ -18,9 +18,9 @@ class MysqlSpreadsheetRepository(SpreadsheetRepositoryInterface):
                 return SpreadsheetModel(id=new_spreadsheet.id, filename=new_spreadsheet.filename,
                                         initial_date=new_spreadsheet.initial_date, final_date=new_spreadsheet.final_date,
                                         link=new_spreadsheet.link)
-            except:
+            except Exception as error:
                 database_connection.session.rollback()
-                raise
+                raise error
             finally:
                 database_connection.session.close()
             
