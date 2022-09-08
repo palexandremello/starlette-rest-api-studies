@@ -1,4 +1,3 @@
-from enum import unique
 from sqlalchemy import Column, String, Integer, Text, DateTime
 from app.infra.repos.config import Base 
 

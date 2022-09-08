@@ -4,12 +4,7 @@ from sqlalchemy.orm import sessionmaker
 
 class DatabaseConnectionHandler:
     def __init__(self) -> None:
-        database_driver = os.environ['DATABASE_DRIVER']
-        database_user = os.environ['DATABASE_USER']
-        database_password = os.environ['DATABASE_PASSWORD']
-        database_url = os.environ['DATABASE_URL']
-        database_name = os.environ['DATABASE_NAME']
-        self.__connection_string = f"{database_driver}://{database_user}:{database_password}@{database_url}/{database_name}"
+        self.__connection_string = os.environ['DATABASE_STRING_URL']
         self.session = None
     
 
