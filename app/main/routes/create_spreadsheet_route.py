@@ -9,12 +9,13 @@ async def create_spreadsheet(request):
     if response.status_code < 300:
         message = {
             "type": "spreadsheet",
-            "attributest": {"filename": response.body.filename,
-                            "initial_date": response.body.initial_date,
-                            "final_date": response.body.final_date}
+            "body": {"filename": response.body.filename,
+                            "initial_date": response.body.initial_date.strftime("%d-%m-%Y %H:%M:%S"),
+                            "final_date": response.body.final_date.strftime("%d-%m-%Y %H:%M:%S")}
         }
 
-        return JSONResponse({"data": message})
+        return JSONResponse(message, status_code=response.status_code)
 
+    print("aqui")
     return  JSONResponse({"error": {"status": response.status_code, "title": response.body["error"]}}, status_code=response.status_code)
     

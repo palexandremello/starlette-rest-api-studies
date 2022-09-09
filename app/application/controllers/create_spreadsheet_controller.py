@@ -22,7 +22,6 @@ class CreateSpreadsheetController(RouteInterface):
                 final_date = body['final_date']
                 filename = body['filename']
                 response = self.create_spreadsheet_use_case.create(initial_date=initial_date, final_date=final_date,filename=filename)
-                print(response)
             else:
                 response = {"success": False, "data": None}
             
