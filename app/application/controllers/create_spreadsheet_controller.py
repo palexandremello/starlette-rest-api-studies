@@ -1,3 +1,4 @@
+import http
 from typing import Type
 from app.application.errors.http_errors import HttpErrors
 from app.application.helpers.http import HttpRequest, HttpResponse
@@ -9,18 +10,19 @@ class CreateSpreadsheetController(RouteInterface):
     def __init__(self, create_spreadsheet_use_case: Type[CreateSpreadsheet]) -> None:
         self.create_spreadsheet_use_case = create_spreadsheet_use_case
 
-    def route(self, http_request: Type[HttpRequest]) -> HttpResponse:
+    async def route(self, http_request: Type[HttpRequest]) -> HttpResponse:
         response = None
         if http_request.body:
-            
-            body_params = http_request.body.keys()
+
+            body = await http_request.body()
+            body_params = body.keys()
 
             if "initial_date" in body_params and "final_date" in body_params:
-                initial_date = http_request.body['initial_date']
-                final_date = http_request.body['final_date']
-                filename = http_request.body['filename']
+                initial_date = body['initial_date']
+                final_date = body['final_date']
+                filename = body['filename']
                 response = self.create_spreadsheet_use_case.create(initial_date=initial_date, final_date=final_date,filename=filename)
-            
+                print(response)
             else:
                 response = {"success": False, "data": None}
             

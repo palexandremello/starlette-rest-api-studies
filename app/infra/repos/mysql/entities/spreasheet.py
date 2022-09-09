@@ -13,4 +13,4 @@ class Spreadsheet(Base):
 
 
     def __repr__(self) -> str:
-        return f"Spreadsheet [filename=({self.filename})"
+        return f"Spreadsheet [filename=({self.filename})]"
