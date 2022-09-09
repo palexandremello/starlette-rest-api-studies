@@ -1,14 +1,18 @@
 import os
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
+from app.main.config.settings import DATABASE_URL
 
 class DatabaseConnectionHandler:
     def __init__(self) -> None:
-        self.__connection_string = os.environ['DATABASE_STRING_URL']
+        self.__connection_string = DATABASE_URL
+        print(self.__connection_string)
         self.session = None
     
 
     def get_engine(self):
+
+        print(self.__connection_string)
         return create_engine(self.__connection_string)
     
     def __enter__(self):
