@@ -9,7 +9,6 @@ def create_spreadsheet_composer():
     :return - Object with Insert Spreadsheet Route
     """
 
-    print("aqui")
     repository = SpreadsheeRepository()
     use_case = CreateSpreadsheet(repository)
     create_spreadsheet_route = CreateSpreadsheetController(use_case)
