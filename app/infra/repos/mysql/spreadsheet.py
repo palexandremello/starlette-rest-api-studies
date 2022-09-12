@@ -3,6 +3,7 @@ from app.data.interfaces.spreadsheet_repository_interface import SpreadsheetRepo
 from app.infra.repos.config.database_config import DatabaseConnectionHandler
 from app.infra.repos.mysql.entities.spreasheet import Spreadsheet
 from app.domain.entities.spreadsheet import Spreadsheet as SpreadsheetModel
+from app.application.helpers.results_functions import create_array_response
 
 class MysqlSpreadsheetRepository(SpreadsheetRepositoryInterface):
     
@@ -27,3 +28,15 @@ class MysqlSpreadsheetRepository(SpreadsheetRepositoryInterface):
     @classmethod
     def select_spreadsheet():
         pass
+
+    @classmethod
+    def list_spreadsheet(cls, initial_date: datetime, final_date: datetime) -> [SpreadsheetModel]:
+        with DatabaseConnectionHandler() as database_connection:
+            try:
+                resp = database_connection.session.query(Spreadsheet).filter(Spreadsheet.initial_date >= initial_date, Spreadsheet.final_date <= final_date).all()
+                return [create_array_response(item) for item in resp] 
+            except Exception as error:
+                database_connection.session.rollback()
+                raise error
+            finally:
+                database_connection.session.close()

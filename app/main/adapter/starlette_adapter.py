@@ -12,9 +12,7 @@ async def starlette_adapter(request: Request, api_route: Type[Route]) -> any:
     :api_route: Composite Routes
     """
     try:
-        query_string_params = request.query_params.keys()
-        if "spreadsheet_id" in query_string_params:
-            query_string_params["spreadsheet_id"] = int(request.query_params['spreadsheet_id'])
+        query_string_params = dict(request.query_params) 
 
     except:
         http_error = HttpErrors.error_400()   
