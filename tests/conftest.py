@@ -7,6 +7,7 @@ sys.path[0] = "app"
 
 @pytest.fixture(scope="session", autouse=True)
 def create_test_database():
+    os.environ['DATABASE_STRING_URL'] = "sqlite:///storage.db"
     database_handler = DatabaseConnectionHandler()
     engine = database_handler.get_engine()
     Base.metadata.create_all(engine)

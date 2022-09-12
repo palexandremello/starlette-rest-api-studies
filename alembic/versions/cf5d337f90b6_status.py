@@ -1,3 +1,4 @@
+
 """status
 
 Revision ID: cf5d337f90b6
@@ -40,7 +41,7 @@ def seed() -> None:
              ('Novo'),
              ('Em Andamento'),
              ('Concluído'),
-             ('Erro');
+             ('Erro')
 
            
         '''
