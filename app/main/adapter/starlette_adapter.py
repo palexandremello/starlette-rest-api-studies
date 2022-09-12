@@ -17,17 +17,19 @@ async def starlette_adapter(request: Request, api_route: Type[Route]) -> any:
             query_string_params["spreadsheet_id"] = int(request.query_params['spreadsheet_id'])
 
     except:
-        http_error = HttpErrors.error_400()   
+        http_error = HttpErrors.error_400()
+        print("aqui aqui entao?")
         return HttpResponse(status_code=http_error['status_code'], body=http_error['body'])
     
 
-    http_request = HttpRequest(header=request.headers, body=request.json, query=query_string_params)
+    http_request = HttpRequest(header=request.headers, body=request.json, form=request.form, query=query_string_params)
 
 
 
     try:
         response = await api_route.route(http_request)
     except IntegrityError:
+        print("aqui aqui entao?")
         http_error = HttpErrors.error_409()
 
         return HttpResponse(

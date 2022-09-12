@@ -2,6 +2,7 @@ from datetime import datetime
 from unittest import mock
 import pytest
 from app.data.interfaces.spreadsheet_repository_interface import SpreadsheetRepositoryInterface
+from app.domain.entities.status import Status
 from app.infra.repos.mysql.spreadsheet import MysqlSpreadsheetRepository
 from app.infra.repos.config.database_config import DatabaseConnectionHandler
 from app.infra.repos.mysql.entities.spreasheet import Spreadsheet
@@ -24,7 +25,7 @@ def test_should_insert_a_spreadsheet_conciliation_when_is_a_correct_data(create_
     sut = MysqlSpreadsheetRepository()
     engine = database_connection_handler.get_engine()
     
-    spreadsheet_conciliation = sut.insert_spreadsheet('any_filename', INITIAL_DATE, FINAL_DATE)
+    spreadsheet_conciliation = sut.insert_spreadsheet('any_filename', INITIAL_DATE, FINAL_DATE, Status.NOVO.value)
     query_spreadsheet = engine.execute(f"SELECT * FROM spreadsheet WHERE id='{spreadsheet_conciliation.id}'").fetchone()
 
     assert spreadsheet_conciliation.id == query_spreadsheet.id

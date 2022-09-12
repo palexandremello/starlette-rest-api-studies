@@ -21,8 +21,8 @@ def upgrade() -> None:
     op.create_table(
         'spreadsheet',
         sa.Column('id', sa.Integer, primary_key=True),
-        sa.Column('from', sa.DateTime, nullable=False),
-        sa.Column('to', sa.DateTime, nullable=False),
+        sa.Column('initial_date', sa.DateTime, nullable=False),
+        sa.Column('final_date', sa.DateTime, nullable=False),
         sa.Column('filename', sa.String(100), nullable=False),
         sa.Column('link', sa.Text, nullable=True),
         sa.Column('path', sa.Text, nullable=True),
