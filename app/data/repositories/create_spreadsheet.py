@@ -12,7 +12,6 @@ class CreateSpreadsheet(CreateSpreadsheetInterface):
     def create(self, filename: str, initial_date: str, final_date: str) -> Dict[bool, List[Spreadsheet]]:
         response = None
         validate_entry = isinstance(filename, str) and isinstance(initial_date, str) and isinstance(final_date, str)
-        print(validate_entry)
         if validate_entry:
             response = self.spreadsheet_repository.insert_spreadsheet(filename, initial_date, final_date)
         

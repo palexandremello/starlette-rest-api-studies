@@ -1,4 +1,3 @@
-from app.main.interface.route import RouteInterface
 from app.infra.repos.mysql.spreadsheet import MysqlSpreadsheetRepository as SpreadsheeRepository
 from app.data.repositories.create_spreadsheet import CreateSpreadsheet
 from app.application.controllers.create_spreadsheet_controller import CreateSpreadsheetController

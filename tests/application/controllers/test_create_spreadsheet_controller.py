@@ -14,11 +14,11 @@ FINAL_DATE = datetime(2022, 2, 1, 1)
 
 
 class SpreadsheetRepositoryStub(SpreadsheetRepositoryInterface):
-    def insert_spreadsheet(self, filename: str, initial_date: datetime, final_date: datetime) -> Spreadsheet:
-        return super().insert_spreadsheet(filename, initial_date, final_date)
+    async def insert_spreadsheet(self, filename: str, initial_date: datetime, final_date: datetime) -> Spreadsheet:
+        return await super().insert_spreadsheet(filename, initial_date, final_date)
     
-    def select_spreadsheet(self, spreadsheet_id: int = None) -> List[Spreadsheet]:
-        return super().select_spreadsheet(spreadsheet_id)
+    async def select_spreadsheet(self, spreadsheet_id: int = None) -> List[Spreadsheet]:
+        return await super().select_spreadsheet(spreadsheet_id)
 
 def mock_spreadsheet_repository():
     spreadsheet_repository = SpreadsheetRepositoryStub()
