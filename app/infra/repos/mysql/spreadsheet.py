@@ -30,10 +30,13 @@ class MysqlSpreadsheetRepository(SpreadsheetRepositoryInterface):
         pass
 
     @classmethod
-    def list_spreadsheet(cls, initial_date: datetime, final_date: datetime) -> [SpreadsheetModel]:
+    def list_spreadsheet(cls, initial_date: str = None, final_date: str = None) -> [SpreadsheetModel]:
         with DatabaseConnectionHandler() as database_connection:
             try:
-                resp = database_connection.session.query(Spreadsheet).filter(Spreadsheet.initial_date >= initial_date, Spreadsheet.final_date <= final_date).all()
+                if initial_date and final_date:
+                    resp = database_connection.session.query(Spreadsheet).filter(Spreadsheet.initial_date >= initial_date, Spreadsheet.final_date <= final_date).all()
+                else:
+                    resp = database_connection.session.query(Spreadsheet).all()
                 return [create_array_response(item) for item in resp] 
             except Exception as error:
                 database_connection.session.rollback()

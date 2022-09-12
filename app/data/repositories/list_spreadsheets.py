@@ -17,3 +17,10 @@ class ListSpreadsheet(ListSpreadsheetInterface):
             response = self.spreadsheet_repository.list_spreadsheet(initial_date, final_date)
         
         return {"success": validate_entry, "data": response}
+
+    def list_all_spreadsheets(self):
+        try:
+            response = self.spreadsheet_repository.list_spreadsheet()
+            return {"success": True, "data": response}
+        except Exception:
+            return {"success": false, "data": None}

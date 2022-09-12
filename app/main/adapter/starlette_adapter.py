@@ -13,7 +13,6 @@ async def starlette_adapter(request: Request, api_route: Type[Route]) -> any:
     """
     try:
         query_string_params = dict(request.query_params) 
-
     except:
         http_error = HttpErrors.error_400()
         print("aqui aqui entao?")

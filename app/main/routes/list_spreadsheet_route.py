@@ -4,7 +4,7 @@ from app.main.composite.list_spreadsheet_composite import list_spreadsheet_compo
 from starlette.responses import JSONResponse
 
 async def list_spreadsheet(request):
-    print(request)
+
     message = {}
     response = await starlette_adapter(request=request, api_route=list_spreadsheet_composer())
     
