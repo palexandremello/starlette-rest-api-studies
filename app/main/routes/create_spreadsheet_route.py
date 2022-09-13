@@ -11,7 +11,8 @@ async def create_spreadsheet(request):
             "type": "spreadsheet",
             "body": {"filename": response.body.filename,
                             "initial_date": response.body.initial_date.strftime("%d-%m-%Y %H:%M:%S"),
-                            "final_date": response.body.final_date.strftime("%d-%m-%Y %H:%M:%S")}
+                            "final_date": response.body.final_date.strftime("%d-%m-%Y %H:%M:%S"),
+                            "status": response.body.status}
         }
 
         return JSONResponse(message, status_code=response.status_code)

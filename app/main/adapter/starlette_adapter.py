@@ -26,7 +26,6 @@ async def starlette_adapter(request: Request, api_route: Type[Route]) -> any:
     try:
         response = await api_route.route(http_request)
     except IntegrityError:
-        print("aqui aqui entao?")
         http_error = HttpErrors.error_409()
 
         return HttpResponse(
