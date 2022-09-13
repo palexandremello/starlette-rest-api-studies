@@ -12,7 +12,6 @@ class SpreadsheetRepositoryInterface(ABC):
     def insert_spreadsheet(self, filename: str, initial_date: datetime, final_date: datetime, status: int) -> Spreadsheet:
         
         raise Exception("Method not implemented")
-
     
     @abstractmethod
     def select_spreadsheet(self, spreadsheet_id: int = None) -> List[Spreadsheet]:

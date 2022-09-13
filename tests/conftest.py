@@ -12,4 +12,3 @@ def create_test_database():
     engine = database_handler.get_engine()
     Base.metadata.create_all(engine)
     yield                            # Run the tests.
-    drop_database(os.environ['DATABASE_STRING_URL'])               # Drop the test database.

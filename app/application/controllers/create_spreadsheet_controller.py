@@ -13,7 +13,7 @@ class CreateSpreadsheetController(RouteInterface):
         response = None
 
         if http_request.form:
-            body = await http_request.form()
+            body = http_request.form
             body_params = body.keys()
 
             if "initial_date" in body_params and "final_date" in body_params:
@@ -36,4 +36,5 @@ class CreateSpreadsheetController(RouteInterface):
         
 
         http_error = HttpErrors.error_400()
+        print("aqui")
         return HttpResponse(status_code=http_error['status_code'], body=http_error['body'])

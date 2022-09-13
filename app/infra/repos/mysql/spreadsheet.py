@@ -1,4 +1,5 @@
 from datetime import datetime
+from typing import List
 from app.data.interfaces.spreadsheet_repository_interface import SpreadsheetRepositoryInterface
 from app.infra.repos.config.database_config import DatabaseConnectionHandler
 from app.infra.repos.mysql.entities.spreasheet import Spreadsheet
@@ -18,6 +19,7 @@ class MysqlSpreadsheetRepository(SpreadsheetRepositoryInterface):
 
                 return SpreadsheetModel(id=new_spreadsheet.id, filename=new_spreadsheet.filename,
                                         initial_date=new_spreadsheet.initial_date, final_date=new_spreadsheet.final_date,
+                                        status=status_id,
                                         link=new_spreadsheet.link)
             except Exception as error:
                 database_connection.session.rollback()
@@ -30,7 +32,7 @@ class MysqlSpreadsheetRepository(SpreadsheetRepositoryInterface):
         pass
 
     @classmethod
-    def list_spreadsheet(cls, initial_date: datetime, final_date: datetime) -> [SpreadsheetModel]:
+    def list_spreadsheet(cls, initial_date: datetime, final_date: datetime) -> List[SpreadsheetModel]:
         with DatabaseConnectionHandler() as database_connection:
             try:
                 resp = database_connection.session.query(Spreadsheet).filter(Spreadsheet.initial_date >= initial_date, Spreadsheet.final_date <= final_date).all()

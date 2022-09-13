@@ -7,6 +7,7 @@ class Spreadsheet:
     filename: str
     initial_date: datetime
     final_date: datetime
+    status: int
     link: str
 
 
