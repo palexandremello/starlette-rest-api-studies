@@ -12,15 +12,14 @@ async def starlette_adapter(request: Request, api_route: Type[Route]) -> any:
     :api_route: Composite Routes
     """
     try:
-        query_string_params = dict(request.query_params) 
-
-    except:
+        query_string_params = dict(request.query_params)
+        form = await request.form()
+    except Exception as error:
         http_error = HttpErrors.error_400()
-        print("aqui aqui entao?")
         return HttpResponse(status_code=http_error['status_code'], body=http_error['body'])
     
 
-    http_request = HttpRequest(header=request.headers, body=request.json, form=request.form, query=query_string_params)
+    http_request = HttpRequest(header=request.headers, body=request.json, form=form, query=query_string_params)
 
 
 
