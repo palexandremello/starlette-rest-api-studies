@@ -23,8 +23,8 @@ class MysqlSpreadsheetRepository(SpreadsheetRepositoryInterface):
                                         final_date=new_spreadsheet.final_date,
                                         status=status_id,
                                         link=new_spreadsheet.link,
-                                        created_at = new_spreadsheet.created_at.strftime('%Y-%m-%d'),
-                                        updated_at = new_spreadsheet.updated_at.strftime('%Y-%m-%d'),
+                                        created_at = new_spreadsheet.created_at,
+                                        updated_at = new_spreadsheet.updated_at,
                                         path = new_spreadsheet.path,
                                         status_id= new_spreadsheet.status_id)
             except Exception as error:
