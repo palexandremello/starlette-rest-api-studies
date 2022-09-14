@@ -11,3 +11,7 @@ class ListSpreadsheet(ABC):
     @abstractmethod
     def list_spreadsheets_by_date(cls, initial_date: datetime, final_date: datetime) -> Dict[bool, List[Spreadsheet]]:
         raise NotImplemented("Should implement method: by_date_id")
+    
+    @abstractmethod
+    def list_all_spreadsheets(cls, initial_date: datetime, final_date: datetime) -> Dict[bool, List[Spreadsheet]]:
+        raise NotImplemented("Should implement method: by_date_id")
