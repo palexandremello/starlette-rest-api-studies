@@ -17,6 +17,5 @@ async def create_spreadsheet(request):
 
         return JSONResponse(message, status_code=response.status_code)
 
-    print(response)
     return  JSONResponse({"error": {"status": response.status_code, "title": response.body["error"]}}, status_code=response.status_code)
     
