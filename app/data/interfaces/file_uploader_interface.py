@@ -7,5 +7,5 @@ class FileUploader(ABC):
     """ Interface to FileUploader """
 
     @abstractmethod
-    async def upload(self, files: List[File] or File) -> List[str] or str:
+    async def upload(self, files: List[File] or File) -> List[str] or Exception:
         raise Exception("not implemented upload method")

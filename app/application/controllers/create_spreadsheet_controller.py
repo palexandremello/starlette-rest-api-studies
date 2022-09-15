@@ -1,6 +1,7 @@
 from typing import Type
 from app.application.errors.http_errors import HttpErrors
 from app.application.helpers.http import HttpRequest, HttpResponse
+from app.infra.errors.file_upload_errors import FileUploadErrors
 from app.main.interface.route import RouteInterface
 from app.domain.usecases.create_spreadsheet import CreateSpreadsheet
 from app.domain.entities.status import Status
@@ -21,6 +22,13 @@ class CreateSpreadsheetController(RouteInterface):
                 final_date = body['final_date']
                 filename = body['filename']
                 status = Status.NOVO.value
+
+                list_of_key = ""
+
+                if isinstance(list_of_key, Exception):
+                    file_upload_error = FileUploadErrors.invalid_spreadsheet()
+                    return HttpResponse(status_code=file_upload_error['status_code'], body=file_upload_error['body'])
+
                 response = self.create_spreadsheet_use_case.create(initial_date=initial_date, final_date=final_date,
                                                                   filename=filename,status=status)
             else:
@@ -36,5 +44,4 @@ class CreateSpreadsheetController(RouteInterface):
         
 
         http_error = HttpErrors.error_400()
-        print("aqui")
         return HttpResponse(status_code=http_error['status_code'], body=http_error['body'])

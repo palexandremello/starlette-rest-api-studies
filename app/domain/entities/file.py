@@ -1,5 +1,4 @@
 import dataclasses
-from io import BytesIO
 
 @dataclasses.dataclass
 class File:
@@ -7,7 +6,7 @@ class File:
     size: int
     type: str
     extension: str
-    content: BytesIO
+    content: str
 
     @classmethod
     def from_dict(cls, dictonary):
