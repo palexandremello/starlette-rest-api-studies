@@ -4,8 +4,6 @@ from app.data.interfaces.file_uploader_interface import FileUploader
 from app.domain.entities.file import File
 
 
-
-
 class AwsS3FileUpload(FileUploader):
     def __init__(self, bucket: str) -> None:
         self.session = self.get_session()

@@ -3,7 +3,6 @@ from unittest.mock import AsyncMock, MagicMock
 from app.domain.usecases.file_upload import FileUpload as FileUploadInterface
 from app.domain.entities.file import File
 from app.data.repositories.upload_spreadsheet import UploadSpreadsheet
-import pytest
 
 
 class FileUploaderStub(FileUploadInterface):
@@ -28,7 +27,6 @@ async def test_should_be_throws_when_upload_spreadsheet_fails():
     file_uploader = mock_file_uploader()
     file_uploader.upload = AsyncMock(return_value=[])
     sut = UploadSpreadsheet(file_uploader)
-    with pytest.raises(Exception):
-        assert await sut.upload('any_file')
-
+    error = await sut.upload('any_file')
+    assert isinstance(error, Exception)
 

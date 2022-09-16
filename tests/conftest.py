@@ -4,6 +4,8 @@ import os
 import csv, io
 from sqlalchemy_utils import drop_database
 from app.infra.repos.config import DatabaseConnectionHandler, Base
+from starlette.requests import Request
+from starlette.datastructures import Headers
 
 sys.path[0] = "app"
 
@@ -52,3 +54,39 @@ def s3_response():
                             'RetryAttempts': 0},
     'VersionId': 'Dbc0gbLVEN4N5F4oz7Hhek0Xd82Mdgyo'}
     return put_object_response
+
+@pytest.fixture(scope="session", autouse=True)
+def build_request(
+    method: str = "GET",
+    server: str = "www.example.com",
+    path: str = "/",
+    headers: dict = None,
+    body: str = None,
+    form: str = None,
+) -> Request:
+    if headers is None:
+        headers = {}
+    request = Request(
+        {
+            "type": "http",
+            "path": path,
+            "headers": Headers(headers).raw,
+            "http_version": "1.1",
+            "method": method,
+            "scheme": "https",
+            "client": ("127.0.0.1", 8080),
+            "server": (server, 443),
+        }
+    )
+    if body:
+
+        async def request_body():
+            return body
+
+        request.body = request_body
+    
+    if form:
+        async def request_form():
+            return form
+        request.form = request_form
+    return request
