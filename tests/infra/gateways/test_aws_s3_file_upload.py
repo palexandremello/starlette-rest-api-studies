@@ -28,7 +28,7 @@ async def test_should_be_able_throw_exception_if_buffer_is_invalid():
 async def test_should_be_able_to_upload_a_file(mock_object_upload_fileobj, valid_buffer):
     mock_object_upload_fileobj.return_value = mock.Mock(return_value="any_response")
     sut = AwsS3FileUpload(BUCKET)
-    file = File('planilha.xlsx', len(valid_buffer.getvalue()), 'spreadsheet', 'xlsx', valid_buffer.getvalue() )
+    file = File('planilha.xlsx', len(valid_buffer), 'spreadsheet', 'xlsx', valid_buffer )
     list_of_key = await sut.upload([file])
     
     assert list_of_key == ['input_spreadsheets/planilha.xlsx']

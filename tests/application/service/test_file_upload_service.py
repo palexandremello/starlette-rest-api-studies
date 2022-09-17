@@ -34,7 +34,7 @@ async def test_should_perfom_a_upload_file(valid_buffer):
     upload_spreadsheet_use_case = UploadSpreadsheet(file_uploader)
     sut = FileUploadService(upload_spreadsheet_use_case)
 
-    list_of_key = await sut.perfom([{'file': valid_buffer, 'filename': 'teste.xlsx'}])
+    list_of_key = await sut.perfom([{'file': valid_buffer, 'filename': 'teste.xlsx', "size": 'any_size'}])
     assert list_of_key == ['any_key_uploaded']
 
 
@@ -44,5 +44,5 @@ async def test_should_return_exception_if_perfom_fails(valid_buffer):
     upload_spreadsheet_use_case = UploadSpreadsheet(file_uploader)
     sut = FileUploadService(upload_spreadsheet_use_case)
 
-    error = await sut.perfom([{'file': valid_buffer, 'filename': 'teste.xlsx'}])
+    error = await sut.perfom([{'file': valid_buffer, 'filename': 'teste.xlsx', "size": 'any_size'}])
     assert isinstance(error, Exception)

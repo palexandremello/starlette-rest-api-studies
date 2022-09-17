@@ -6,6 +6,7 @@ from sqlalchemy_utils import drop_database
 from app.infra.repos.config import DatabaseConnectionHandler, Base
 from starlette.requests import Request
 from starlette.datastructures import Headers
+from starlette.datastructures import UploadFile
 
 sys.path[0] = "app"
 
@@ -32,12 +33,14 @@ def invalid_buffer():
 
 @pytest.fixture(scope="session", autouse=True)
 def valid_buffer():
-    data = b'Hello World\n'
-    fh = io.BytesIO()
-    fh.write(data)
-    fh.seek(0)
-    return fh
+    os.environ["PORTAL_TRANSPORTADORA_BUCKET"] = "portal-transportadora-bucket"
+    os.environ["LOCALSTACK_URL"] = "http://localhost:4566"
+    bytesObject = b'\x65\x66\x67\x00\x10\x00\x00\x00\x04\x00'
+    return bytesObject
 
+@pytest.fixture(scope="session", autouse=True)
+def valid_uploadFile():
+    return UploadFile('any_filename.xlsx', io.BytesIO(), content_type="xlsx")
 
 @pytest.fixture(scope="session", autouse=True)
 def s3_response():

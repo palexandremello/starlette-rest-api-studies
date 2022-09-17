@@ -11,7 +11,9 @@ class FileUploadService(ServiceInterface):
 
     async def perfom(self, files: dict) -> List[str] or Exception:
         for file in files:
-            self.files.append(File(file['filename'], len(file['file'].getvalue()), 'xlsx', 'xlsx', file['file'] ))
+            file_model = File(file['filename'], file['size'], 'xlsx', 'xlsx', file['file'] )
+            print(file_model)
+            self.files.append(file_model)
 
         list_of_key =  await self.upload_file_use_case.upload(self.files)
 

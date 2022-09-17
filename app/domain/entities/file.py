@@ -6,7 +6,7 @@ class File:
     size: int
     type: str
     extension: str
-    content: str
+    content: bytes
 
     @classmethod
     def from_dict(cls, dictonary):
