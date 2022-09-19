@@ -4,7 +4,7 @@ from starlette.routing import Route, Mount
 
 routes = [
     Mount('/v1/api/spreadsheet',routes=[
-        Route('/', create_spreadsheet, methods=['POST']),
-        Route('/', list_spreadsheet, methods=['GET']),
+        Route('/send', create_spreadsheet, methods=['POST']),
+        Route('/list', list_spreadsheet, methods=['GET']),
     ])
 ]
