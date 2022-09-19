@@ -9,6 +9,7 @@ class Spreadsheet:
     final_date: datetime
     status: str
     link: str
+    path: str
 
 
     @classmethod

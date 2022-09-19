@@ -7,5 +7,6 @@ def create_array_response(item):
                             initial_date=item.initial_date.strftime('%Y-%m-%d'),
                             final_date=item.final_date.strftime('%Y-%m-%d'),
                             status=item.status.name,
-                            link=item.link).to_dict()
+                            link=item.link,
+                            path=item.path).to_dict()
     return spreadsheet
