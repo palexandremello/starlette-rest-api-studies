@@ -13,6 +13,10 @@ async def starlette_adapter(request: Request, api_route: Type[Route]) -> any:
     :api_route: Composite Routes
     """
     try:
+<<<<<<< HEAD
+        query_string_params = dict(request.query_params) 
+    except:
+=======
         query_string_params = dict(request.query_params)
         form = await request.form()
         file = form['file']
@@ -30,6 +34,7 @@ async def starlette_adapter(request: Request, api_route: Type[Route]) -> any:
         
     except Exception as error:
         print(error)
+>>>>>>> 973ce23c1c917dfa6579b184c6b9f02c4acde0be
         http_error = HttpErrors.error_400()
         return HttpResponse(status_code=http_error['status_code'], body=http_error['body'])
     
