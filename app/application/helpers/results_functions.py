@@ -6,11 +6,7 @@ def create_array_response(item):
                             filename=item.filename,
                             initial_date=item.initial_date.strftime('%Y-%m-%d'),
                             final_date=item.final_date.strftime('%Y-%m-%d'),
+                            status=item.status.name,
                             link=item.link,
-                            status = item.status.name,
-                            created_at = item.created_at.strftime('%Y-%m-%d'),
-                            updated_at = item.updated_at.strftime('%Y-%m-%d'),
-                            path = item.path,
-                            status_id= item.status_id
-                            ).to_dict()
+                            path=item.path).to_dict()
     return spreadsheet

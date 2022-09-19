@@ -9,7 +9,7 @@ class SpreadsheetRepositoryInterface(ABC):
     """ Interface to SpreadsheetRepository """
 
     @abstractmethod
-    def insert_spreadsheet(self, filename: str, initial_date: datetime, final_date: datetime, status: int) -> Spreadsheet:
+    def insert_spreadsheet(self, filename: str, initial_date: datetime, final_date: datetime, status: int, path: str) -> Spreadsheet:
         
         raise Exception("Method not implemented")
     

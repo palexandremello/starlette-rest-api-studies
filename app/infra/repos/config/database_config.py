@@ -6,13 +6,11 @@ from app.main.config.settings import DATABASE_URL
 class DatabaseConnectionHandler:
     def __init__(self) -> None:
         self.__connection_string = DATABASE_URL
-        print(self.__connection_string)
         self.session = None
     
 
     def get_engine(self):
 
-        print(self.__connection_string)
         return create_engine(self.__connection_string)
     
     def __enter__(self):

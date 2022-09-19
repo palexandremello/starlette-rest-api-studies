@@ -9,24 +9,23 @@ from app.application.helpers.results_functions import create_array_response
 class MysqlSpreadsheetRepository(SpreadsheetRepositoryInterface):
     
     @classmethod
-    def insert_spreadsheet(cls, filename: str, initial_date: datetime, final_date: datetime, status_id: int) -> SpreadsheetModel:
+    def insert_spreadsheet(cls, filename: str, initial_date: datetime, 
+                           final_date: datetime, status_id: int,
+                           path: str) -> SpreadsheetModel:
         
         with DatabaseConnectionHandler() as database_connection:
             try:
-                new_spreadsheet = Spreadsheet(filename=filename, initial_date=initial_date, final_date=final_date, status_id=status_id)
+                new_spreadsheet = Spreadsheet(filename=filename, initial_date=initial_date,
+                                              final_date=final_date, status_id=status_id,
+                                              path=path)
+
                 database_connection.session.add(new_spreadsheet)
                 database_connection.session.commit()
 
-                return SpreadsheetModel(id=new_spreadsheet.id, 
-                                        filename=new_spreadsheet.filename,
-                                        initial_date=new_spreadsheet.initial_date,
-                                        final_date=new_spreadsheet.final_date,
-                                        status=status_id,
-                                        link=new_spreadsheet.link,
-                                        created_at = new_spreadsheet.created_at,
-                                        updated_at = new_spreadsheet.updated_at,
-                                        path = new_spreadsheet.path,
-                                        status_id= new_spreadsheet.status_id)
+                return SpreadsheetModel(id=new_spreadsheet.id, filename=new_spreadsheet.filename,
+                                        initial_date=new_spreadsheet.initial_date, final_date=new_spreadsheet.final_date,
+                                        status=new_spreadsheet.status.name,link=new_spreadsheet.link,
+                                        path=new_spreadsheet.path)
             except Exception as error:
                 database_connection.session.rollback()
                 raise error

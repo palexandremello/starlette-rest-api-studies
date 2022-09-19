@@ -1,3 +1,4 @@
+import io
 from typing import Type
 import traceback
 from starlette.requests import Request
@@ -12,22 +13,34 @@ async def starlette_adapter(request: Request, api_route: Type[Route]) -> any:
     :api_route: Composite Routes
     """
     try:
-        query_string_params = dict(request.query_params) 
+        query_string_params = dict(request.query_params)
+        form = await request.form()
+        file = form['file']
+        content = await file.read()
+        temp_file = io.BytesIO()
+        temp_file.write(content)
+        temp_file.seek(0)
 
-    except:
+        form_data = {"file": temp_file,
+                     "initial_date": form['initial_date'],
+                     "final_date": form["final_date"],
+                     "filename": file.filename,
+                     'size': len(content),
+                     "content_type": file.content_type }
+        
+    except Exception as error:
+        print(error)
         http_error = HttpErrors.error_400()
-        print("aqui aqui entao?")
         return HttpResponse(status_code=http_error['status_code'], body=http_error['body'])
     
 
-    http_request = HttpRequest(header=request.headers, body=request.json, form=request.form, query=query_string_params)
+    http_request = HttpRequest(header=request.headers, body=request.json, form=form_data, query=query_string_params)
 
 
 
     try:
         response = await api_route.route(http_request)
     except IntegrityError:
-        print("aqui aqui entao?")
         http_error = HttpErrors.error_409()
 
         return HttpResponse(
