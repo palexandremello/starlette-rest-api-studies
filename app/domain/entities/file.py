@@ -1,16 +1,12 @@
 import dataclasses
-from datetime import datetime
 
 @dataclasses.dataclass
-class Spreadsheet:
-    id: int
+class File:
     filename: str
-    initial_date: datetime
-    final_date: datetime
-    status: str
-    link: str
-    path: str
-
+    size: int
+    type: str
+    extension: str
+    content: bytes
 
     @classmethod
     def from_dict(cls, dictonary):
@@ -18,4 +14,3 @@ class Spreadsheet:
     
     def to_dict(self):
         return dataclasses.asdict(self)
-        

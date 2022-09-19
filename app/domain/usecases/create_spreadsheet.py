@@ -9,7 +9,7 @@ class CreateSpreadsheet(ABC):
     """ Interface to CreateSpreadsheet use case"""
 
     @abstractmethod
-    def create(cls,filename: str, initial_date: datetime, final_date: datetime) -> Dict[bool, List[Spreadsheet]]:
+    def create(cls,filename: str, initial_date: datetime, final_date: datetime, status_id: int, path: str) -> Dict[bool, List[Spreadsheet]]:
         
         raise Exception("Should implement method: by_spreadsheet_id")
 

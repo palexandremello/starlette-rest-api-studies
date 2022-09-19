@@ -35,4 +35,4 @@ def test_should_not_insert_a_spreadsheet_conciliation_when_insert_spreadsheet_th
     sut = MysqlSpreadsheetRepository()
     with mock.patch.object(sqlalchemy.orm.session.Session,'add', side_effect=Exception("ERROR")):
         with pytest.raises(Exception):
-            assert sut.insert_spreadsheet('any_filename', INITIAL_DATE, FINAL_DATE)
+            assert sut.insert_spreadsheet('any_filename', INITIAL_DATE, FINAL_DATE, Status.NOVO.value)

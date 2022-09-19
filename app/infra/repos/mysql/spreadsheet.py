@@ -1,4 +1,5 @@
 from datetime import datetime
+from typing import List
 from app.data.interfaces.spreadsheet_repository_interface import SpreadsheetRepositoryInterface
 from app.infra.repos.config.database_config import DatabaseConnectionHandler
 from app.infra.repos.mysql.entities.spreasheet import Spreadsheet
@@ -8,17 +9,23 @@ from app.application.helpers.results_functions import create_array_response
 class MysqlSpreadsheetRepository(SpreadsheetRepositoryInterface):
     
     @classmethod
-    def insert_spreadsheet(cls, filename: str, initial_date: datetime, final_date: datetime, status_id: int) -> SpreadsheetModel:
+    def insert_spreadsheet(cls, filename: str, initial_date: datetime, 
+                           final_date: datetime, status_id: int,
+                           path: str) -> SpreadsheetModel:
         
         with DatabaseConnectionHandler() as database_connection:
             try:
-                new_spreadsheet = Spreadsheet(filename=filename, initial_date=initial_date, final_date=final_date, status_id=status_id)
+                new_spreadsheet = Spreadsheet(filename=filename, initial_date=initial_date,
+                                              final_date=final_date, status_id=status_id,
+                                              path=path)
+
                 database_connection.session.add(new_spreadsheet)
                 database_connection.session.commit()
 
                 return SpreadsheetModel(id=new_spreadsheet.id, filename=new_spreadsheet.filename,
                                         initial_date=new_spreadsheet.initial_date, final_date=new_spreadsheet.final_date,
-                                        link=new_spreadsheet.link)
+                                        status=new_spreadsheet.status.name,link=new_spreadsheet.link,
+                                        path=new_spreadsheet.path)
             except Exception as error:
                 database_connection.session.rollback()
                 raise error

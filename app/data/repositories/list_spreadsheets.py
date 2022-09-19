@@ -23,4 +23,8 @@ class ListSpreadsheet(ListSpreadsheetInterface):
             response = self.spreadsheet_repository.list_spreadsheet()
             return {"success": True, "data": response}
         except Exception:
+<<<<<<< HEAD
             return {"success": false, "data": None}
+=======
+            return {"success": False, "data": None}
+>>>>>>> 973ce23c1c917dfa6579b184c6b9f02c4acde0be
